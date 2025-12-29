@@ -13,6 +13,7 @@ import scaffoldConfig from "~~/scaffold.config";
 
 const { onlyLocalBurnerWallet, targetNetworks } = scaffoldConfig;
 
+// Type assertion needed due to version mismatch between burner-connector's bundled rainbowkit and our rainbowkit
 const wallets = [
   metaMaskWallet,
   walletConnectWallet,
@@ -21,7 +22,7 @@ const wallets = [
   rainbowWallet,
   safeWallet,
   ...(!targetNetworks.some(network => network.id !== (chains.hardhat as chains.Chain).id) || !onlyLocalBurnerWallet
-    ? [rainbowkitBurnerWallet]
+    ? [rainbowkitBurnerWallet as unknown as typeof metaMaskWallet]
     : []),
 ];
 

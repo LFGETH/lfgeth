@@ -1,1 +1,5 @@
+# Run type checking before lint-staged (needs full project context)
+yarn next:check-types
+
+# Run lint-staged for formatting and linting
 yarn lint-staged --verbose

@@ -40,7 +40,7 @@ export function DebugContracts() {
         <>
           {contractNames.length > 1 && (
             <div className="flex flex-row gap-2 w-full max-w-7xl pb-1 px-6 lg:px-10 flex-wrap">
-              {contractNames.map(contractName => (
+              {contractNames.map((contractName: string) => (
                 <button
                   className={`btn btn-secondary btn-sm font-light hover:border-transparent ${
                     contractName === selectedContract
@@ -48,7 +48,7 @@ export function DebugContracts() {
                       : "bg-base-100 hover:bg-secondary"
                   }`}
                   key={contractName}
-                  onClick={() => setSelectedContract(contractName)}
+                  onClick={() => setSelectedContract(contractName as ContractName)}
                 >
                   {contractName}
                   {(contractsData[contractName] as GenericContract)?.external && (
@@ -60,9 +60,10 @@ export function DebugContracts() {
               ))}
             </div>
           )}
-          {contractNames.map(
-            contractName =>
-              contractName === selectedContract && <ContractUI key={contractName} contractName={contractName} />,
+          {contractNames.map((contractName: string) =>
+            contractName === selectedContract ? (
+              <ContractUI key={contractName} contractName={contractName} />
+            ) : null,
           )}
         </>
       )}

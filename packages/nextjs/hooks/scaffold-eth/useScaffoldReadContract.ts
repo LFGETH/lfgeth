@@ -73,8 +73,7 @@ export const useScaffoldReadContract = <
     if (defaultWatch) {
       queryClient.invalidateQueries({ queryKey: readContractHookRes.queryKey });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blockNumber]);
+  }, [blockNumber, defaultWatch, queryClient, readContractHookRes.queryKey]);
 
   return readContractHookRes;
 };

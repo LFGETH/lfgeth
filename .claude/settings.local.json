@@ -49,7 +49,9 @@
       "WebFetch(domain:etherscan.io)",
       "Bash(pkill:*)",
       "Bash(yarn hardhat:compile:*)",
-      "Bash(yarn foundry:compile:*)"
+      "Bash(yarn foundry:compile:*)",
+      "Bash(npm view:*)",
+      "Bash(npx lint-staged:*)"
     ]
   }
 }
