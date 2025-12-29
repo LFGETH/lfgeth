@@ -2,14 +2,14 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 // Useful for debugging. Remove when deploying to a live network.
-import "hardhat/console.sol";
+import "forge-std/console.sol";
 
 // Use openzeppelin to inherit battle-tested implementations (ERC20, ERC721, etc)
 // import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * A smart contract that allows changing a state variable of the contract and tracking the changes
- * It also allows the owner to withdraw the Ether in the contract
+ * It also allows the owner to withdraw the Ether from the contract
  * @author BuidlGuidl
  */
 contract YourContract {
@@ -18,13 +18,13 @@ contract YourContract {
     string public greeting = "Building Unstoppable Apps!!!";
     bool public premium = false;
     uint256 public totalCounter = 0;
-    mapping(address => uint) public userGreetingCounter;
+    mapping(address => uint256) public userGreetingCounter;
 
     // Events: a way to emit log statements from smart contract that can be listened to by external parties
     event GreetingChange(address indexed greetingSetter, string newGreeting, bool premium, uint256 value);
 
     // Constructor: Called once on contract deployment
-    // Check packages/hardhat/deploy/00_deploy_your_contract.ts
+    // Check packages/foundry/deploy/Deploy.s.sol
     constructor(address _owner) {
         owner = _owner;
     }
@@ -43,10 +43,11 @@ contract YourContract {
      * @param _newGreeting (string memory) - new greeting to save on the contract
      */
     function setGreeting(string memory _newGreeting) public payable {
-        // Print data to the hardhat chain console. Remove when deploying to a live network.
-        console.log("Setting new greeting '%s' from %s", _newGreeting, msg.sender);
+        // Print data to the anvil chain console. Remove when deploying to a live network.
 
-        // Change state variables
+        console.logString("Setting new greeting");
+        console.logString(_newGreeting);
+
         greeting = _newGreeting;
         totalCounter += 1;
         userGreetingCounter[msg.sender] += 1;
@@ -67,12 +68,12 @@ contract YourContract {
      * The function can only be called by the owner of the contract as defined by the isOwner modifier
      */
     function withdraw() public isOwner {
-        (bool success, ) = owner.call{ value: address(this).balance }("");
+        (bool success,) = owner.call{ value: address(this).balance }("");
         require(success, "Failed to send Ether");
     }
 
     /**
      * Function that allows the contract to receive ETH
      */
-    receive() external payable {}
+    receive() external payable { }
 }
