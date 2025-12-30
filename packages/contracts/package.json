@@ -1,5 +1,5 @@
 {
-  "name": "@se-2/hardhat",
+  "name": "@se-2/contracts",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -9,18 +9,33 @@
     "account:reveal-pk": "hardhat run scripts/revealPK.ts",
     "chain": "hardhat node",
     "check-types": "tsc --noEmit --incremental",
-    "clean": "hardhat clean",
+    "clean": "hardhat clean && forge clean",
     "compile": "hardhat compile",
     "deploy": "hardhat ignition deploy ignition/modules/ScaffoldEthDeployModule.ts --network localhost",
     "flatten": "hardhat flatten",
     "fork": "MAINNET_FORKING_ENABLED=true hardhat node --network hardhat --no-deploy",
-    "format": "prettier --write './**/*.(ts|sol)'",
+    "format": "prettier --write './**/*.(ts|sol)' && forge fmt",
     "generate": "yarn account:generate",
     "hardhat-verify": "hardhat verify",
     "lint": "eslint",
     "lint-staged": "eslint",
     "test": "REPORT_GAS=true hardhat test --network hardhat",
-    "verify": "hardhat etherscan-verify"
+    "verify": "hardhat etherscan-verify",
+    "foundry:account": "node scripts-js/checkAccountBalance.js",
+    "foundry:account:generate": "node scripts-js/generateKeystore.js",
+    "foundry:account:import": "node scripts-js/importAccount.js",
+    "foundry:account:reveal-pk": "node scripts-js/revealPK.js",
+    "foundry:chain": "make chain",
+    "foundry:clean": "forge clean",
+    "foundry:compile": "forge compile",
+    "foundry:deploy": "node scripts-js/parseArgs.js",
+    "foundry:flatten": "forge flatten",
+    "foundry:fork": "make fork FORK_URL=${1:-mainnet}",
+    "foundry:format": "forge fmt && prettier --write ./scripts-js/**/*.js",
+    "foundry:lint": "forge fmt --check && prettier --check ./scripts-js/**/*.js",
+    "foundry:test": "forge test",
+    "foundry:verify": "make verify RPC_URL=${1:-localhost}",
+    "postinstall": "shx cp -n .env.example .env"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ignition": "^3.0.6",
@@ -46,6 +61,7 @@
     "hardhat": "^3.1.0",
     "prettier": "^3.7.4",
     "prettier-plugin-solidity": "^2.2.1",
+    "shx": "^0.4.0",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.9.3",
@@ -56,6 +72,8 @@
     "@openzeppelin/contracts": "5.4.0",
     "dotenv": "^17.2.3",
     "envfile": "^7.1.0",
-    "qrcode": "^1.5.4"
+    "ethers": "~6.16.0",
+    "qrcode": "^1.5.4",
+    "toml": "~3.0.0"
   }
 }

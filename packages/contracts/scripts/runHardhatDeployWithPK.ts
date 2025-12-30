@@ -10,7 +10,10 @@ import { config } from "hardhat";
  */
 async function main() {
   const networkIndex = process.argv.indexOf("--network");
-  const networkName = networkIndex !== -1 ? process.argv[networkIndex + 1] : config.defaultNetwork;
+  const networkName =
+    networkIndex !== -1
+      ? process.argv[networkIndex + 1]
+      : config.defaultNetwork;
 
   if (networkName === "localhost" || networkName === "hardhat") {
     // Deploy command on the localhost network
@@ -20,7 +23,7 @@ async function main() {
       shell: process.platform === "win32",
     });
 
-    hardhat.on("exit", code => {
+    hardhat.on("exit", (code) => {
       process.exit(code || 0);
     });
     return;
@@ -29,11 +32,15 @@ async function main() {
   const encryptedKey = process.env.DEPLOYER_PRIVATE_KEY_ENCRYPTED;
 
   if (!encryptedKey) {
-    console.log("🚫️ You don't have a deployer account. Run `yarn generate` or `yarn account:import` first");
+    console.log(
+      "🚫️ You don't have a deployer account. Run `yarn generate` or `yarn account:import` first",
+    );
     return;
   }
 
-  const pass = await password({ message: "Enter password to decrypt private key:" });
+  const pass = await password({
+    message: "Enter password to decrypt private key:",
+  });
 
   try {
     const wallet = await Wallet.fromEncryptedJson(encryptedKey, pass);
@@ -45,7 +52,7 @@ async function main() {
       shell: process.platform === "win32",
     });
 
-    hardhat.on("exit", code => {
+    hardhat.on("exit", (code) => {
       process.exit(code || 0);
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

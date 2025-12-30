@@ -51,7 +51,11 @@
       "Bash(yarn hardhat:compile:*)",
       "Bash(yarn foundry:compile:*)",
       "Bash(npm view:*)",
-      "Bash(npx lint-staged:*)"
+      "Bash(npx lint-staged:*)",
+      "Bash(ln:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:hardhat.org)"
     ]
   }
 }

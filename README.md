@@ -37,7 +37,7 @@ To get started with Scaffold-ETH 2, follow the steps below:
 ```
 git clone -b foundry https://github.com/scaffold-eth/scaffold-eth-2.git
 cd scaffold-eth-2
-yarn install && forge install --root packages/foundry
+yarn install && forge install --root packages/contracts
 ```
 
 2. Run a local network in the first terminal:
@@ -67,7 +67,7 @@ Visit your app on: `http://localhost:3000`. You can interact with your smart con
 <details open>
 <summary>Understanding deployment scripts structure</summary>
 
-Scaffold-ETH 2 uses two types of deployment scripts in `packages/foundry/script`:
+Scaffold-ETH 2 uses two types of deployment scripts in `packages/contracts/script`:
 
 1. `Deploy.s.sol`: Main deployment script that runs all contracts sequentially
 2. Individual scripts (e.g., `DeployYourContract.s.sol`): Deploy specific contracts
@@ -118,8 +118,8 @@ This will use the `DeployYourContract.s.sol` script to deploy the contract.
 <details>
 <summary>Creating new deployments</summary>
 
-1. Create your contract in `packages/foundry/contracts`
-2. Create deployment script in `packages/foundry/script` (use existing scripts as templates)
+1. Create your contract in `packages/contracts/contracts`
+2. Create deployment script in `packages/contracts/script` (use existing scripts as templates)
 3. Add to main `Deploy.s.sol` if needed
 4. Deploy using commands above
 </details>
@@ -152,7 +152,7 @@ View your account status:
 yarn account
 ```
 
-This will ask you to select [keystore](https://book.getfoundry.sh/reference/cli/cast/wallet#cast-wallet) present `~/.foundry/keystores` and show you the balance of selected account on network configured in `packages/foundry/foundry.toml`.
+This will ask you to select [keystore](https://book.getfoundry.sh/reference/cli/cast/wallet#cast-wallet) present `~/.foundry/keystores` and show you the balance of selected account on network configured in `packages/contracts/foundry.toml`.
 
 ## Documentation
 

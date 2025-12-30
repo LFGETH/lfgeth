@@ -1,0 +1,47 @@
+# dependencies
+node_modules
+
+# env files
+.env
+
+# coverage
+coverage
+coverage.json
+
+# typechain
+typechain
+typechain-types
+
+# ===== Hardhat-specific =====
+# hardhat files
+cache
+artifacts
+
+# zkSync files
+artifacts-zk
+cache-zk
+
+# Ignition deployments (local only)
+ignition/deployments/chain-31337
+
+# ===== Foundry-specific =====
+# foundry build output
+out/
+
+# foundry broadcast logs (local network only)
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# foundry docs
+docs/
+
+# foundry deployments
+deployments/*.json
+!deployments/.gitignore
+
+# ===== Common =====
+# typescript
+*.tsbuildinfo
+
+# other
+temp

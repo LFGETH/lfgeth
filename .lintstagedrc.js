@@ -8,7 +8,7 @@ const buildNextEslintCommand = (filenames) =>
 module.exports = {
   // Type checking moved to pre-commit hook (needs full project, can't run on stashed partial files)
   "packages/nextjs/**/*.{ts,tsx}": [buildNextEslintCommand],
-  "packages/hardhat/**/*.{ts,tsx}": ["yarn hardhat:lint-staged --fix"],
-  "packages/foundry/**/*.sol": ["forge fmt --root packages/foundry"],
-  "packages/foundry/**/*.js": ["yarn workspace @se-2/foundry prettier --write"],
+  "packages/contracts/**/*.{ts,tsx}": ["yarn workspace @se-2/contracts lint-staged --fix"],
+  "packages/contracts/**/*.sol": ["forge fmt --root packages/contracts"],
+  "packages/contracts/scripts-js/**/*.js": ["yarn workspace @se-2/contracts prettier --write"],
 };

@@ -43,7 +43,7 @@ const Home: NextPage = () => {
             </code>{" "}
             in{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
+              packages/contracts/contracts
             </code>
           </p>
         </div>

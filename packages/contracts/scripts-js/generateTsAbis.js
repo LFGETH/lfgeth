@@ -58,7 +58,7 @@ function getDeploymentHistory(broadcastPath) {
       (file) =>
         file.startsWith("run-") &&
         file.endsWith(".json") &&
-        !file.includes("run-latest")
+        !file.includes("run-latest"),
     )
     .sort((a, b) => {
       // Extract run numbers and compare them
@@ -69,7 +69,7 @@ function getDeploymentHistory(broadcastPath) {
 
   for (const file of runFiles) {
     const { transactions, receipts } = parseTransactionAndReceiptRun(
-      join(broadcastPath, file)
+      join(broadcastPath, file),
     );
 
     for (const tx of transactions) {
@@ -93,13 +93,13 @@ function getArtifactOfContract(contractName) {
   const current_path_to_artifacts = join(
     __dirname,
     "..",
-    `out/${contractName}.sol`
+    `out/${contractName}.sol`,
   );
 
   if (!existsSync(current_path_to_artifacts)) return null;
 
   const artifactJson = JSON.parse(
-    readFileSync(`${current_path_to_artifacts}/${contractName}.json`)
+    readFileSync(`${current_path_to_artifacts}/${contractName}.json`),
   );
 
   return artifactJson;
@@ -112,7 +112,7 @@ function getInheritedFromContracts(artifact) {
       if (astNode.nodeType == "ContractDefinition") {
         if (astNode.baseContracts.length > 0) {
           inheritedFromContracts = astNode.baseContracts.map(
-            ({ baseName }) => baseName.name
+            ({ baseName }) => baseName.name,
           );
         }
       }
@@ -155,7 +155,7 @@ function processAllDeployments(broadcastPath) {
 
       deploymentHistory.forEach((deployment) => {
         const timestamp = parseInt(
-          deployment.deploymentFile.match(/run-(\d+)/)?.[1] || "0"
+          deployment.deploymentFile.match(/run-(\d+)/)?.[1] || "0",
         );
         const key = `${chainId}-${deployment.contractName}`;
 
@@ -213,14 +213,14 @@ function main() {
     if (!chain.endsWith(".json")) return;
     chain = chain.slice(0, -5);
     var deploymentObject = JSON.parse(
-      readFileSync(`${current_path_to_deployments}/${chain}.json`)
+      readFileSync(`${current_path_to_deployments}/${chain}.json`),
     );
     deployments[chain] = deploymentObject;
   });
 
   // Process all deployments from all script folders
   const allGeneratedContracts = processAllDeployments(
-    current_path_to_broadcast
+    current_path_to_broadcast,
   );
 
   // Update contract keys based on deployments if they exist
@@ -249,15 +249,15 @@ function main() {
         Object.entries(chainConfig).map(([contractName, contractData]) => {
           const { deploymentFile, deploymentScript, ...rest } = contractData;
           return [contractName, rest];
-        })
+        }),
       );
       return `${content}${parseInt(chainId).toFixed(0)}:${JSON.stringify(
         cleanedChainConfig,
         null,
-        2
+        2,
       )},`;
     },
-    ""
+    "",
   );
 
   // Write the files
@@ -274,11 +274,11 @@ function main() {
     `${NEXTJS_TARGET_DIR}deployedContracts.ts`,
     format(fileTemplate("~~/utils/scaffold-eth/contract"), {
       parser: "typescript",
-    })
+    }),
   );
 
   console.log(
-    `📝 Updated TypeScript contract definition file on ${NEXTJS_TARGET_DIR}deployedContracts.ts`
+    `📝 Updated TypeScript contract definition file on ${NEXTJS_TARGET_DIR}deployedContracts.ts`,
   );
 }
 

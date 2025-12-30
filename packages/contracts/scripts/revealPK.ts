@@ -7,13 +7,17 @@ async function main() {
   const encryptedKey = process.env.DEPLOYER_PRIVATE_KEY_ENCRYPTED;
 
   if (!encryptedKey) {
-    console.log("🚫️ You don't have a deployer account. Run `yarn generate` or `yarn account:import` first");
+    console.log(
+      "🚫️ You don't have a deployer account. Run `yarn generate` or `yarn account:import` first",
+    );
     return;
   }
 
   console.log("👀 This will reveal your private key on the console.\n");
 
-  const pass = await password({ message: "Enter your password to decrypt the private key:" });
+  const pass = await password({
+    message: "Enter your password to decrypt the private key:",
+  });
   let wallet: Wallet;
   try {
     wallet = (await Wallet.fromEncryptedJson(encryptedKey, pass)) as Wallet;
@@ -25,7 +29,7 @@ async function main() {
   console.log("\n🔑 Private key:", wallet.privateKey);
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
