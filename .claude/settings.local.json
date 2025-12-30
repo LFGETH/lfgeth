@@ -55,7 +55,8 @@
       "Bash(ln:*)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:hardhat.org)"
+      "WebFetch(domain:hardhat.org)",
+      "Bash(git config:*)"
     ]
   }
 }
